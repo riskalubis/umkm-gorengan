@@ -1,0 +1,33 @@
+UMKM BARU - SISTEM ADMIN + PELANGGAN
+
+ALUR SISTEM
+1. Produk hanya muncul setelah admin menambahkannya di menu Produk.
+2. Harga default produk adalah Rp2.000 per pcs, tetapi admin boleh mengubahnya.
+3. Foto, nama, harga, dan deskripsi produk tersimpan di database.
+4. Total Produk di Dashboard, Kategori, dan Produk Terdaftar di Persediaan mengambil data yang sama dari tabel produks.
+5. Stok tidak diisi di Produk. Admin mengisi stok melalui Persediaan.
+6. Produk baru hanya tampil di halaman pelanggan setelah admin membuka persediaan hari ini dengan jumlah > 0.
+7. Pembelian pelanggan otomatis mengurangi persediaan dan membuat pesanan di menu Penjualan.
+8. Admin dapat mengonfirmasi/mengubah status: Menunggu Konfirmasi, Diterima, Digoreng, Diantar, Selesai, atau Dibatalkan.
+9. Jika pesanan dibatalkan, jumlah persediaan dikembalikan.
+10. Jika pesanan yang dibatalkan dibuka kembali, persediaan dipotong lagi setelah dicek mencukupi.
+
+SETUP DATABASE KOSONG
+Jika ingin memulai benar-benar kosong (produk, kategori, persediaan, pesanan), jalankan:
+
+php artisan migrate:fresh --seed
+
+Seeder hanya membuat akun admin:
+Email    : admin@gorenganku.test
+Password : password
+
+SETUP FOTO
+Jalankan sekali:
+
+php artisan storage:link
+
+Lalu jalankan:
+
+php artisan serve
+
+Catatan: file .env tidak disertakan pada ZIP hasil perbaikan. Gunakan .env.example sebagai acuan dan isi koneksi MySQL milik sendiri.
