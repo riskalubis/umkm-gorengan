@@ -397,7 +397,7 @@
             @if($produk->foto)
 
                 <img
-                    src="{{ asset('storage/'.$produk->foto) }}"
+                   src="{{ \Illuminate\Support\Facades\Storage::disk('s3')->url($produk->foto) }}"
                     alt="{{ $produk->nama }}"
                 >
 
