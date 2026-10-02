@@ -397,7 +397,7 @@
             @if($produk->foto)
 
                 <img
-                   src="{{ \Illuminate\Support\Facades\Storage::disk('s3')->url($produk->foto) }}"
+                   src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($produk->foto) }}"
                     alt="{{ $produk->nama }}"
                 >
 

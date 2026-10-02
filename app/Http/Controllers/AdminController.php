@@ -129,7 +129,7 @@ class AdminController extends Controller
 
         // Upload foto jika ada
         if ($r->hasFile('foto')) {
-            $data['foto'] = $r->file('foto')->store('produk', 's3');
+            $data['foto'] = $r->file('foto')->store('produk', 'public');
         }
 
         // Jangan isi stok di tabel produk.
