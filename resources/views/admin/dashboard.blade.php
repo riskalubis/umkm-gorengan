@@ -163,6 +163,14 @@
                 Laporan
             </button>
 
+            <form method="POST" action="{{ route('logout') }}" style="width:100%; margin-top:8px;">
+    @csrf
+
+    <button type="submit" class="menu-item">
+        ↪ Keluar
+    </button>
+</form>
+
         </nav>
 
     </aside>

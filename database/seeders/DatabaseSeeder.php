@@ -10,12 +10,22 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Sistem dimulai kosong. Hanya akun admin yang dibuat.
+        // Admin utama
         User::updateOrCreate(
             ['email' => 'admin@gorenganku.test'],
             [
                 'name' => 'Admin Gorenganku',
                 'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+            ]
+        );
+
+        // Admin Riskadinda
+        User::updateOrCreate(
+            ['email' => 'riskadinda267@gmail.com'],
+            [
+                'name' => 'Riskadinda',
+                'password' => Hash::make('riskadinda'),
                 'email_verified_at' => now(),
             ]
         );
