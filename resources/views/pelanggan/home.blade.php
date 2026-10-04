@@ -591,7 +591,7 @@ body{
         @if($inv->produk->foto)
 
             <img
-                src="{{ asset('storage/'.$inv->produk->foto) }}"
+                src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($inv->produk->foto) }}"
                 alt="{{ $inv->produk->nama }}"
             >
 
