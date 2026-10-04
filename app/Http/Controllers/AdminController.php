@@ -243,19 +243,28 @@ class AdminController extends Controller
     // =====================================================
 
     public function updateStatus(Request $r, Pesanan $pesanan)
-    {
-        $data = $r->validate([
-            'status' => 'required|in:menunggu,diterima,digoreng,diantar,selesai,dibatalkan'
-        ]);
+{
+    $data = $r->validate([
+        'status' => 'required|in:menunggu,diterima,digoreng,diantar,selesai,ditolak',
+        'alasan_penolakan' => 'nullable|string|max:500',
+    ]);
 
-        DB::transaction(function () use ($pesanan, $data) {
+    DB::transaction(function () use ($pesanan, $data) {
 
-            $oldStatus = $pesanan->status;
-            $newStatus = $data['status'];
+        $oldStatus = $pesanan->status;
+        $newStatus = $data['status'];
 
-            // Pesanan yang dibatalkan mengembalikan jumlah persediaan.
-            if ($newStatus === 'dibatalkan' && $oldStatus !== 'dibatalkan') {
+        /*
+        |----------------------------------------------------------
+        | DITOLAK
+        |----------------------------------------------------------
+        */
+        if ($newStatus === 'ditolak') {
+
+            if ($oldStatus !== 'ditolak') {
+
                 foreach ($pesanan->items as $item) {
+
                     $inv = Persediaan::where('produk_id', $item->produk_id)
                         ->whereDate('tanggal', now()->toDateString())
                         ->lockForUpdate()
@@ -267,30 +276,51 @@ class AdminController extends Controller
                 }
             }
 
-            // Jika pesanan yang sebelumnya dibatalkan dibuka kembali,
-            // jumlah persediaan dipotong lagi.
-            if ($oldStatus === 'dibatalkan' && $newStatus !== 'dibatalkan') {
-                foreach ($pesanan->items as $item) {
-                    $inv = Persediaan::where('produk_id', $item->produk_id)
-                        ->whereDate('tanggal', now()->toDateString())
-                        ->lockForUpdate()
-                        ->first();
+            $pesanan->status = 'ditolak';
 
-                    if (!$inv || $inv->jumlah < $item->jumlah) {
-                        abort(422, 'Persediaan '.$item->nama_produk.' tidak mencukupi untuk mengaktifkan kembali pesanan.');
-                    }
+            $pesanan->alasan_penolakan =
+                $data['alasan_penolakan']
+                ?? 'Pesanan tidak dapat diproses.';
 
-                    $inv->decrement('jumlah', $item->jumlah);
+            $pesanan->save();
+
+            return;
+        }
+
+        /*
+        |----------------------------------------------------------
+        | PESANAN YANG SEBELUMNYA DITOLAK DIAKTIFKAN LAGI
+        |----------------------------------------------------------
+        */
+        if ($oldStatus === 'ditolak' && $newStatus !== 'ditolak') {
+
+            foreach ($pesanan->items as $item) {
+
+                $inv = Persediaan::where('produk_id', $item->produk_id)
+                    ->whereDate('tanggal', now()->toDateString())
+                    ->lockForUpdate()
+                    ->first();
+
+                if (!$inv || $inv->jumlah < $item->jumlah) {
+                    abort(
+                        422,
+                        'Persediaan '.$item->nama_produk.' tidak mencukupi.'
+                    );
                 }
+
+                $inv->decrement('jumlah', $item->jumlah);
             }
 
-            $pesanan->update([
-                'status' => $newStatus
-            ]);
-        });
+            $pesanan->alasan_penolakan = null;
+        }
 
-        return response()->json([
-            'message' => 'Status pesanan diperbarui.'
-        ]);
-    }
+        $pesanan->status = $newStatus;
+
+        $pesanan->save();
+    });
+
+    return response()->json([
+        'message' => 'Status pesanan diperbarui.'
+    ]);
+}
 }

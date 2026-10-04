@@ -1,258 +1,621 @@
 <style>
-.sales-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-    margin-top:32px;
-    margin-bottom:28px;
-}
-
-.sales-card,
-.sales-panel{
-    background:#fff;
-    border:1px solid #f3e8dd;
-    border-radius:18px;
-    padding:24px;
-}
-
-.sales-card span{
-    color:#a8a29e;
-    font-size:11px;
-}
-
-.sales-card strong{
-    display:block;
-    font-size:28px;
-    margin-top:8px;
-}
-
-.sales-panel{
-    margin-bottom:18px;
-}
-
-.order{
-    border:1px solid #f3e8dd;
-    border-radius:15px;
-    padding:18px;
-    margin-top:13px;
-}
-
-.order-top{
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
-}
-
-.badge{
-    padding:6px 9px;
-    border-radius:8px;
-    background:#fff7ed;
-    color:#ea580c;
-    font-size:10px;
-    font-weight:700;
-}
-
-.items{
-    margin:12px 0;
-    color:#78716c;
-    font-size:12px;
-    line-height:1.7;
-}
-
-.status-select{
-    padding:9px;
-    border:1px solid #e7ddd4;
-    border-radius:9px;
-}
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(41,37,36,.45);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:18px;
-    z-index:9999;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.box{
-    width:min(420px,100%);
-    background:#fff;
-    border-radius:20px;
-    padding:25px;
-}
-
-.primary{
-    border:0;
-    background:#f97316;
-    color:#fff;
-    padding:11px 15px;
-    border-radius:10px;
-    font-weight:700;
-}
-
-.actions{
-    display:flex;
-    justify-content:flex-end;
-    margin-top:18px;
-}
-
-@media(max-width:800px){
     .sales-stats{
-        grid-template-columns:1fr;
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:18px;
+        margin-top:32px;
+        margin-bottom:28px;
     }
-}
+
+    .sales-card{
+        background:#fff;
+        border:1px solid #f3e8dd;
+        border-radius:18px;
+        padding:24px;
+    }
+
+    .sales-card span{
+        color:#a8a29e;
+        font-size:11px;
+    }
+
+    .sales-card strong{
+        display:block;
+        font-size:28px;
+        margin-top:8px;
+    }
+
+    /* BOARD */
+    .sales-board-wrap{
+        overflow-x:auto;
+        padding-bottom:8px;
+    }
+
+    .sales-board{
+        display:grid;
+        grid-template-columns:repeat(6, minmax(270px, 1fr));
+        gap:16px;
+        min-width:1660px;
+    }
+
+    .status-column{
+        background:#faf7f4;
+        border:1px solid #eee5de;
+        border-radius:18px;
+        padding:14px;
+        min-height:350px;
+    }
+
+    .column-head{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:8px;
+        padding:4px 4px 13px;
+        border-bottom:1px solid #eee5de;
+        margin-bottom:12px;
+    }
+
+    .column-title{
+        font-size:12px;
+        font-weight:800;
+        color:#57534e;
+        text-transform:uppercase;
+        line-height:1.35;
+    }
+
+    .column-count{
+        min-width:27px;
+        height:27px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:999px;
+        background:#fff;
+        color:#78716c;
+        border:1px solid #eadfd6;
+        font-size:11px;
+        font-weight:800;
+    }
+
+    .status-column.menunggu{
+        border-top:4px solid #f97316;
+    }
+
+    .status-column.diterima{
+        border-top:4px solid #60a5fa;
+    }
+
+    .status-column.digoreng{
+        border-top:4px solid #fb923c;
+    }
+
+    .status-column.diantar{
+        border-top:4px solid #8b5cf6;
+    }
+
+    .status-column.selesai{
+        border-top:4px solid #22c55e;
+    }
+
+    .status-column.ditolak{
+        border-top:4px solid #ef4444;
+    }
+
+    /* ORDER CARD */
+    .order-card{
+        background:#fff;
+        border:1px solid #eee5de;
+        border-radius:14px;
+        padding:15px;
+        margin-bottom:11px;
+        box-shadow:0 4px 14px rgba(80,50,30,.04);
+        transition:.2s ease;
+    }
+
+    .order-card:hover{
+        transform:translateY(-1px);
+        box-shadow:0 8px 20px rgba(80,50,30,.07);
+    }
+
+    .order-name{
+        font-size:14px;
+        font-weight:800;
+        color:#292524;
+    }
+
+    .order-code{
+        margin-top:4px;
+        color:#a8a29e;
+        font-size:10px;
+    }
+
+    .order-time{
+        color:#a8a29e;
+        font-size:10px;
+        margin-top:2px;
+    }
+
+    .order-items{
+        margin:13px 0;
+        padding-top:10px;
+        border-top:1px solid #f1e9e3;
+        color:#78716c;
+        font-size:11px;
+        line-height:1.7;
+    }
+
+    .order-total{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:8px;
+        margin-top:12px;
+    }
+
+    .order-total strong{
+        font-size:13px;
+        color:#292524;
+    }
+
+    .status-pill{
+        display:inline-flex;
+        align-items:center;
+        gap:5px;
+        padding:6px 9px;
+        border-radius:999px;
+        font-size:9px;
+        font-weight:800;
+        margin-top:11px;
+    }
+
+    .pill-menunggu{
+        background:#fff7ed;
+        color:#ea580c;
+    }
+
+    .pill-diterima{
+        background:#eff6ff;
+        color:#2563eb;
+    }
+
+    .pill-digoreng{
+        background:#fff7ed;
+        color:#c2410c;
+    }
+
+    .pill-diantar{
+        background:#f5f3ff;
+        color:#7c3aed;
+    }
+
+    .pill-selesai{
+        background:#ecfdf5;
+        color:#15803d;
+    }
+
+    .pill-ditolak{
+        background:#fef2f2;
+        color:#dc2626;
+    }
+
+    /* ACTION BUTTON */
+    .order-actions{
+        display:flex;
+        flex-direction:column;
+        gap:7px;
+        margin-top:12px;
+    }
+
+    .status-btn{
+        width:100%;
+        border:0;
+        border-radius:9px;
+        padding:10px 11px;
+        font-size:11px;
+        font-weight:800;
+        cursor:pointer;
+        transition:.2s ease;
+    }
+
+    .status-btn.primary{
+        background:#f97316;
+        color:white;
+    }
+
+    .status-btn.primary:hover{
+        background:#ea580c;
+    }
+
+    .status-btn.danger{
+        background:#fff1f2;
+        color:#dc2626;
+    }
+
+    .status-btn.danger:hover{
+        background:#ffe4e6;
+    }
+
+    .status-btn.success{
+        background:#ecfdf5;
+        color:#15803d;
+    }
+
+    .status-btn.success:hover{
+        background:#dcfce7;
+    }
+
+    .status-btn.info{
+        background:#eff6ff;
+        color:#2563eb;
+    }
+
+    .status-btn.info:hover{
+        background:#dbeafe;
+    }
+
+    .empty-column{
+        color:#aaa19a;
+        font-size:11px;
+        text-align:center;
+        padding:35px 10px;
+    }
+
+    /* MODAL */
+    .modal{
+        position:fixed;
+        inset:0;
+        background:rgba(41,37,36,.45);
+        display:none;
+        align-items:center;
+        justify-content:center;
+        padding:18px;
+        z-index:9999;
+    }
+
+    .modal.show{
+        display:flex;
+    }
+
+    .modal-box{
+        width:min(400px,100%);
+        background:#fff;
+        border-radius:20px;
+        padding:25px;
+        box-shadow:0 20px 50px rgba(0,0,0,.12);
+    }
+
+    .modal-box h2{
+        font-size:20px;
+        margin:0;
+    }
+
+    .modal-box p{
+        margin-top:8px;
+        color:#a8a29e;
+        font-size:13px;
+        line-height:1.5;
+    }
+
+    .modal-actions{
+        display:flex;
+        justify-content:flex-end;
+        margin-top:18px;
+    }
+
+    .close-btn{
+        border:0;
+        background:#f97316;
+        color:#fff;
+        padding:10px 15px;
+        border-radius:10px;
+        font-weight:700;
+        cursor:pointer;
+    }
+
+    @media(max-width:800px){
+        .sales-stats{
+            grid-template-columns:1fr;
+        }
+    }
 </style>
+
 
 <div class="page-heading">
     <h1>Penjualan</h1>
 </div>
 
+
+<!-- SUMMARY -->
 <div class="sales-stats">
 
     <div class="sales-card">
         <span>PENJUALAN</span>
+
         <strong>
-            Rp<?php echo e(number_format($pesanans->where('status','!=','dibatalkan')->sum('total'),0,',','.')); ?>
+            Rp<?php echo e(number_format(
+                $pesanans
+                    ->where('status','!=','ditolak')
+                    ->sum('total'),
+                0,
+                ',',
+                '.'
+            )); ?>
 
         </strong>
     </div>
 
+
     <div class="sales-card">
         <span>TRANSAKSI HARI INI</span>
-        <strong><?php echo e($pesanans->count()); ?></strong>
+
+        <strong>
+            <?php echo e($pesanans->count()); ?>
+
+        </strong>
     </div>
+
 
     <div class="sales-card">
         <span>MENUNGGU KONFIRMASI</span>
-        <strong><?php echo e($pesanans->where('status','menunggu')->count()); ?></strong>
+
+        <strong id="waitingCount">
+            <?php echo e($pesanans->where('status','menunggu')->count()); ?>
+
+        </strong>
     </div>
 
 </div>
 
-<div class="sales-panel">
 
-    <h3>Pesanan Masuk Hari Ini</h3>
+<!-- BOARD -->
+<div class="sales-board-wrap">
 
-    <?php $__empty_1 = true; $__currentLoopData = $pesanans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pesanan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+    <div class="sales-board">
 
-        <div class="order">
 
-            <div class="order-top">
+        <!-- MENUNGGU -->
+        <div class="status-column menunggu"
+             id="column-menunggu">
 
-                <div>
-                    <b><?php echo e($pesanan->nama_pelanggan); ?></b>
+            <div class="column-head">
 
-                    <div style="color:#a8a29e;font-size:11px">
-                        <?php echo e($pesanan->kode); ?> · <?php echo e($pesanan->created_at->format('H:i')); ?>
-
-                    </div>
+                <div class="column-title">
+                    Menunggu<br>
+                    Konfirmasi
                 </div>
 
-                <span class="badge">
-                    <?php echo e(strtoupper($pesanan->status)); ?>
+                <div class="column-count">
+                    <?php echo e($pesanans->where('status','menunggu')->count()); ?>
 
-                </span>
-
-            </div>
-
-            <div class="items">
-
-                <?php $__currentLoopData = $pesanan->items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-                    <?php echo e($item->nama_produk); ?>
-
-                    × <?php echo e($item->jumlah); ?>
-
-                    — Rp<?php echo e(number_format($item->subtotal,0,',','.')); ?>
-
-
-                    <br>
-
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
 
             </div>
 
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
 
-                <b>
-                    Rp<?php echo e(number_format($pesanan->total,0,',','.')); ?>
+            <?php $__empty_1 = true; $__currentLoopData = $pesanans->where('status','menunggu'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pesanan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 
-                </b>
+                <?php echo $__env->make('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'menunggu'
+                ], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-                <select
-                    class="status-select"
-                    onchange="ubahStatus(<?php echo e($pesanan->id); ?>,this.value)"
-                >
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
 
-                    <option value="menunggu"
-                        <?php if($pesanan->status==='menunggu'): echo 'selected'; endif; ?>>
-                        Menunggu Konfirmasi
-                    </option>
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
 
-                    <option value="diterima"
-                        <?php if($pesanan->status==='diterima'): echo 'selected'; endif; ?>>
-                        Pesanan Diterima
-                    </option>
-
-                    <option value="digoreng"
-                        <?php if($pesanan->status==='digoreng'): echo 'selected'; endif; ?>>
-                        Sedang Digoreng
-                    </option>
-
-                    <option value="diantar"
-                        <?php if($pesanan->status==='diantar'): echo 'selected'; endif; ?>>
-                        Sedang Diantar
-                    </option>
-
-                    <option value="selesai"
-                        <?php if($pesanan->status==='selesai'): echo 'selected'; endif; ?>>
-                        Selesai
-                    </option>
-
-                    <option value="dibatalkan"
-                        <?php if($pesanan->status==='dibatalkan'): echo 'selected'; endif; ?>>
-                        Batalkan
-                    </option>
-
-                </select>
-
-            </div>
+            <?php endif; ?>
 
         </div>
 
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
 
-        <div style="padding:45px;text-align:center;color:#a8a29e">
-            Belum ada pesanan hari ini.
+        <!-- DITERIMA -->
+        <div class="status-column diterima"
+             id="column-diterima">
+
+            <div class="column-head">
+
+                <div class="column-title">
+                    Pesanan<br>
+                    Diterima
+                </div>
+
+                <div class="column-count">
+                    <?php echo e($pesanans->where('status','diterima')->count()); ?>
+
+                </div>
+
+            </div>
+
+
+            <?php $__empty_1 = true; $__currentLoopData = $pesanans->where('status','diterima'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pesanan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+
+                <?php echo $__env->make('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'diterima'
+                ], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            <?php endif; ?>
+
         </div>
 
-    <?php endif; ?>
+
+        <!-- DIGORENG -->
+        <div class="status-column digoreng"
+             id="column-digoreng">
+
+            <div class="column-head">
+
+                <div class="column-title">
+                    Sedang<br>
+                    Digoreng
+                </div>
+
+                <div class="column-count">
+                    <?php echo e($pesanans->where('status','digoreng')->count()); ?>
+
+                </div>
+
+            </div>
+
+
+            <?php $__empty_1 = true; $__currentLoopData = $pesanans->where('status','digoreng'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pesanan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+
+                <?php echo $__env->make('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'digoreng'
+                ], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            <?php endif; ?>
+
+        </div>
+
+
+        <!-- DIANTAR -->
+        <div class="status-column diantar"
+             id="column-diantar">
+
+            <div class="column-head">
+
+                <div class="column-title">
+                    Sedang<br>
+                    Diantar
+                </div>
+
+                <div class="column-count">
+                    <?php echo e($pesanans->where('status','diantar')->count()); ?>
+
+                </div>
+
+            </div>
+
+
+            <?php $__empty_1 = true; $__currentLoopData = $pesanans->where('status','diantar'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pesanan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+
+                <?php echo $__env->make('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'diantar'
+                ], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            <?php endif; ?>
+
+        </div>
+
+
+        <!-- SELESAI -->
+        <div class="status-column selesai"
+             id="column-selesai">
+
+            <div class="column-head">
+
+                <div class="column-title">
+                    Selesai
+                </div>
+
+                <div class="column-count">
+                    <?php echo e($pesanans->where('status','selesai')->count()); ?>
+
+                </div>
+
+            </div>
+
+
+            <?php $__empty_1 = true; $__currentLoopData = $pesanans->where('status','selesai'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pesanan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+
+                <?php echo $__env->make('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'selesai'
+                ], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            <?php endif; ?>
+
+        </div>
+
+
+        <!-- DITOLAK -->
+        <div class="status-column ditolak"
+             id="column-ditolak">
+
+            <div class="column-head">
+
+                <div class="column-title">
+                    Ditolak
+                </div>
+
+                <div class="column-count">
+                    <?php echo e($pesanans->where('status','ditolak')->count()); ?>
+
+                </div>
+
+            </div>
+
+
+            <?php $__empty_1 = true; $__currentLoopData = $pesanans->where('status','ditolak'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pesanan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+
+                <?php echo $__env->make('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'ditolak'
+                ], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            <?php endif; ?>
+
+        </div>
+
+
+    </div>
 
 </div>
 
+
+<!-- MODAL -->
 <div class="modal" id="statusModal">
 
-    <div class="box">
+    <div class="modal-box">
 
         <h2 id="statusTitle">
-            Status diperbarui
+            Berhasil
         </h2>
 
-        <p id="statusText"
-           style="color:#a8a29e;font-size:13px">
-        </p>
+        <p id="statusText"></p>
 
-        <div class="actions">
+        <div class="modal-actions">
 
             <button
-                class="primary"
-                onclick="statusModal.classList.remove('show')">
+                class="close-btn"
+                onclick="statusModal.classList.remove('show')"
+            >
                 Tutup
             </button>
 
@@ -262,46 +625,545 @@
 
 </div>
 
-<script>
-const stToken='<?php echo e(csrf_token()); ?>';
+<!-- MODAL ALASAN PENOLAKAN -->
+<div class="modal" id="tolakModal">
 
-async function ubahStatus(id,status){
+    <div class="modal-box">
+
+        <h2>Alasan Pesanan Ditolak</h2>
+
+        <p>
+            Pilih alasan agar pelanggan mengetahui
+            kenapa pesanannya tidak dapat diproses.
+        </p>
+
+        <select
+            id="alasanTolak"
+            style="
+                width:100%;
+                margin-top:18px;
+                padding:12px;
+                border:1px solid #ead8cc;
+                border-radius:11px;
+                background:#fffaf5;
+                color:#57534e;
+                font-size:13px;
+                outline:none;
+            "
+        >
+            <option value="">
+                Pilih alasan penolakan
+            </option>
+
+            <option value="Stok produk habis.">
+                Stok produk habis
+            </option>
+
+            <option value="Produk tidak tersedia.">
+                Produk tidak tersedia
+            </option>
+
+            <option value="Pesanan tidak dapat diproses.">
+                Pesanan tidak dapat diproses
+            </option>
+        </select>
+
+        <textarea
+            id="catatanTolak"
+            rows="3"
+            placeholder="Tambahkan keterangan untuk pelanggan (opsional)"
+            style="
+                width:100%;
+                margin-top:12px;
+                padding:12px;
+                border:1px solid #ead8cc;
+                border-radius:11px;
+                resize:none;
+                font-family:inherit;
+                font-size:13px;
+                outline:none;
+            "
+        ></textarea>
+
+        <div
+            id="tolakError"
+            style="
+                display:none;
+                margin-top:10px;
+                padding:10px;
+                border-radius:10px;
+                background:#fef2f2;
+                color:#dc2626;
+                font-size:12px;
+            "
+        ></div>
+
+        <div style="
+            display:flex;
+            justify-content:flex-end;
+            gap:10px;
+            margin-top:18px;
+        ">
+
+            <button
+                type="button"
+                class="status-btn"
+                style="
+                    width:auto;
+                    background:#f5f5f4;
+                    color:#57534e;
+                    padding:10px 15px;
+                "
+                onclick="tutupModalTolak()"
+            >
+                Kembali
+            </button>
+
+            <button
+                type="button"
+                class="status-btn danger"
+                style="
+                    width:auto;
+                    padding:10px 15px;
+                "
+                onclick="konfirmasiTolak()"
+            >
+                Tolak Pesanan
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const stToken = '<?php echo e(csrf_token()); ?>';
+
+
+const statusInfo = {
+
+    menunggu: {
+        label: 'Menunggu Konfirmasi',
+        pill: 'pill-menunggu'
+    },
+
+    diterima: {
+        label: 'Pesanan Diterima',
+        pill: 'pill-diterima'
+    },
+
+    digoreng: {
+        label: 'Sedang Digoreng',
+        pill: 'pill-digoreng'
+    },
+
+    diantar: {
+        label: 'Sedang Diantar',
+        pill: 'pill-diantar'
+    },
+
+    selesai: {
+        label: 'Selesai',
+        pill: 'pill-selesai'
+    },
+
+    ditolak: {
+        label: 'Ditolak',
+        pill: 'pill-ditolak'
+    }
+
+};
+
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+function actionButtons(id, status){
+
+    if(status === 'menunggu'){
+
+        return `
+            <button
+                type="button"
+                class="status-btn primary"
+                onclick="ubahStatus(${id}, 'diterima', this.closest('.order-card'))"
+            >
+                ✓ Setujui Pesanan
+            </button>
+
+            <button
+    type="button"
+    class="status-btn danger"
+    onclick="bukaModalTolak(${id}, this.closest('.order-card'))"
+>
+    Tolak Pesanan
+</button>
+        `;
+
+    }
+
+
+    if(status === 'diterima'){
+
+        return `
+            <button
+                type="button"
+                class="status-btn primary"
+                onclick="ubahStatus(${id}, 'digoreng', this.closest('.order-card'))"
+            >
+                Mulai Digoreng
+            </button>
+        `;
+
+    }
+
+
+    if(status === 'digoreng'){
+
+        return `
+            <button
+                type="button"
+                class="status-btn info"
+                onclick="ubahStatus(${id}, 'diantar', this.closest('.order-card'))"
+            >
+                Pesanan Diantar
+            </button>
+        `;
+
+    }
+
+
+    if(status === 'diantar'){
+
+        return `
+            <button
+                type="button"
+                class="status-btn success"
+                onclick="ubahStatus(${id}, 'selesai', this.closest('.order-card'))"
+            >
+                Tandai Selesai
+            </button>
+        `;
+
+    }
+
+
+    return '';
+}
+
+
+/* =========================
+   MOVE CARD
+========================= */
+
+function moveCard(card, id, newStatus){
+
+    const target =
+        document.getElementById(
+            'column-' + newStatus
+        );
+
+    if(!target) return;
+
+
+    /* badge */
+    const info = statusInfo[newStatus];
+
+    const badge =
+        card.querySelector('.status-pill');
+
+    badge.textContent =
+        info.label;
+
+    badge.className =
+        'status-pill ' + info.pill;
+
+
+    /* status data */
+    card.dataset.status =
+        newStatus;
+
+
+    /* buttons */
+    const actions =
+        card.querySelector('.order-actions');
+
+    actions.innerHTML =
+        actionButtons(id, newStatus);
+
+
+    /* pindahkan card */
+    target.appendChild(card);
+
+
+    updateColumnCounts();
+
+}
+
+
+/* =========================
+   UPDATE JUMLAH COLUMN
+========================= */
+
+function updateColumnCounts(){
+
+    document.querySelectorAll(
+        '.status-column'
+    ).forEach(column => {
+
+        const count =
+            column.querySelectorAll(
+                '.order-card'
+            ).length;
+
+        const counter =
+            column.querySelector(
+                '.column-count'
+            );
+
+        if(counter){
+            counter.textContent =
+                count;
+        }
+
+        const empty =
+            column.querySelector(
+                '.empty-column'
+            );
+
+        if(empty){
+
+            empty.style.display =
+                count === 0
+                    ? 'block'
+                    : 'none';
+
+        }
+
+    });
+
+
+    const waiting =
+        document.querySelectorAll(
+            '#column-menunggu .order-card'
+        ).length;
+
+    const waitingCount =
+        document.getElementById(
+            'waitingCount'
+        );
+
+    if(waitingCount){
+        waitingCount.textContent =
+            waiting;
+    }
+
+}
+
+
+/* =========================
+   UPDATE STATUS
+========================= */
+
+async function ubahStatus(id, status, card){
 
     try{
 
-        let r=await fetch(
-            '/admin/penjualan/'+id+'/status',
-            {
-                method:'PUT',
-                headers:{
-                    'Content-Type':'application/json',
-                    'Accept':'application/json',
-                    'X-CSRF-TOKEN':stToken
-                },
-                body:JSON.stringify({status})
-            }
-        );
+        const response =
+            await fetch(
+                '/admin/penjualan/' +
+                id +
+                '/status',
+                {
+                    method:'PUT',
 
-        let d=await r.json();
+                    headers:{
+                        'Content-Type':
+                            'application/json',
 
-        if(!r.ok)
-            throw new Error(
-                d.message || 'Status gagal diperbarui.'
+                        'Accept':
+                            'application/json',
+
+                        'X-CSRF-TOKEN':
+                            stToken
+                    },
+
+                    body:
+                        JSON.stringify({
+                            status:status
+                        })
+                }
             );
 
-        statusTitle.textContent='Berhasil';
-        statusText.textContent=d.message;
-        statusModal.classList.add('show');
+
+        const data =
+            await response.json();
 
 
-    }catch(e){
+        if(!response.ok){
 
-        statusTitle.textContent='Tidak berhasil';
-        statusText.textContent=e.message;
-        statusModal.classList.add('show');
+            throw new Error(
+                data.message ||
+                'Status gagal diperbarui.'
+            );
+
+        }
+
+
+        moveCard(
+            card,
+            id,
+            status
+        );
+
+
+        statusTitle.textContent =
+            'Berhasil';
+
+        statusText.textContent =
+            data.message ||
+            'Status pesanan berhasil diperbarui.';
+
+        statusModal.classList.add(
+            'show'
+        );
+
+
+    }catch(error){
+
+        statusTitle.textContent =
+            'Tidak berhasil';
+
+        statusText.textContent =
+            error.message;
+
+        statusModal.classList.add(
+            'show'
+        );
 
     }
 
 }
-</script>
-<?php /**PATH C:\Users\apiip\OneDrive\Documents\umkm-gorengan\resources\views/admin/penjualan.blade.php ENDPATH**/ ?>
+
+let pesananTolakId = null;
+let cardTolak = null;
+
+function bukaModalTolak(id, card) {
+
+    pesananTolakId = id;
+    cardTolak = card;
+
+    document.getElementById('alasanTolak').value = '';
+    document.getElementById('catatanTolak').value = '';
+    document.getElementById('tolakError').style.display = 'none';
+
+    document.getElementById('tolakModal').classList.add('show');
+}
+
+
+function tutupModalTolak() {
+
+    document
+        .getElementById('tolakModal')
+        .classList.remove('show');
+}
+
+
+async function konfirmasiTolak() {
+
+    const alasan =
+        document.getElementById('alasanTolak').value;
+
+    const catatan =
+        document.getElementById('catatanTolak')
+            .value
+            .trim();
+
+    const errorBox =
+        document.getElementById('tolakError');
+
+
+    if (!alasan) {
+
+        errorBox.textContent =
+            'Silakan pilih alasan penolakan terlebih dahulu.';
+
+        errorBox.style.display = 'block';
+
+        return;
+    }
+
+
+    let alasanFinal = alasan;
+
+    if (catatan) {
+        alasanFinal += ' ' + catatan;
+    }
+
+
+    try {
+
+        const response = await fetch(
+            '/admin/penjualan/' + pesananTolakId + '/status',
+            {
+                method: 'PUT',
+
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': stToken
+                },
+
+                body: JSON.stringify({
+                    status: 'ditolak',
+                    alasan_penolakan: alasanFinal
+                })
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (!response.ok) {
+            throw new Error(
+                data.message || 'Pesanan gagal ditolak.'
+            );
+        }
+
+
+        tutupModalTolak();
+
+
+        // pindahkan kartu ke wadah Ditolak
+        moveCard(
+            cardTolak,
+            pesananTolakId,
+            'ditolak'
+        );
+
+
+        // tampilkan notifikasi
+        statusTitle.textContent =
+            'Pesanan Ditolak';
+
+        statusText.textContent =
+            'Alasan penolakan berhasil disimpan.';
+
+        statusModal.classList.add('show');
+
+
+    } catch (error) {
+
+        errorBox.textContent =
+            error.message;
+
+        errorBox.style.display =
+            'block';
+    }
+}
+
+</script><?php /**PATH C:\Users\apiip\OneDrive\Documents\umkm-gorengan\resources\views/admin/penjualan.blade.php ENDPATH**/ ?>

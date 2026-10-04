@@ -541,12 +541,27 @@ body{
 
 <!-- HERO -->
 <section class="hero">
-    <h1>Gorengan hangat, siap menemani harimu.</h1>
+    <h1>
+        Gorengan hangat, siap menemani harimu.
+    </h1>
     <p>
         Lihat & Pesan GorenganKu hari ini!
     </p>
 </section>
 
+<style>
+.hero h1{
+    white-space:nowrap;
+    font-size:48px;
+}
+
+@media(max-width:800px){
+    .hero h1{
+        white-space:normal;
+        font-size:36px;
+    }
+}
+</style>
 
 <!-- PRODUK -->
 <div class="section-title">
@@ -642,11 +657,26 @@ body{
 
     <!-- TAMBAH -->
     <button
-        class="add-btn"
-        onclick="addToCart({{ $inv->produk->id }})"
-    >
-        Tambah ke Keranjang
-    </button>
+    class="add-btn"
+    onclick="addToCart({{ $inv->produk->id }})"
+>
+    Tambah ke Keranjang
+</button>
+
+<div
+    id="cart-message-{{ $inv->produk->id }}"
+    style="
+        display:none;
+        margin-top:10px;
+        padding:9px 11px;
+        border-radius:10px;
+        background:#fff7ed;
+        border:1px solid #fed7aa;
+        color:#c2410c;
+        font-size:11px;
+        line-height:1.4;
+    "
+></div>
 
 </div>
 
@@ -928,10 +958,6 @@ function changeQty(id, change){
 }
 
 
-/* =========================
-   TAMBAH KE KERANJANG
-========================= */
-
 function addToCart(id){
 
     const product =
@@ -939,29 +965,55 @@ function addToCart(id){
 
     if(!product) return;
 
-    if(!cart[id]){
+    const qtyElement =
+        document.getElementById('qty-' + id);
 
-        cart[id] = 1;
+    const jumlah =
+        Number(qtyElement?.textContent || 0);
 
-        document.getElementById(
-            'qty-'+id
-        ).textContent = 1;
+    // HANYA jumlah 0 yang ditolak
+    if(jumlah <= 0){
 
+        const message =
+            document.getElementById('cart-message-' + id);
+
+        if(message){
+
+            message.textContent =
+                'Silakan tentukan jumlah terlebih dahulu.';
+
+            message.style.display = 'block';
+
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 2500);
+
+        }
+
+        return;
     }
+
+    // Jumlah 1, 2, 3 dst tetap pakai notif lama
+    cart[id] = jumlah;
 
     updateCartCount();
 
-   const toast = document.getElementById('toast');
-const toastText = document.getElementById('toastText');
+    const toast =
+        document.getElementById('toast');
 
-toastText.textContent = product.name + ' berhasil ditambahkan ke keranjang.';
-toast.classList.add('show');
+    const toastText =
+        document.getElementById('toastText');
 
-setTimeout(() => {
-    toast.classList.remove('show');
-}, 2500);
+    toastText.textContent =
+        product.name +
+        ' berhasil ditambahkan ke keranjang.';
+
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2500);
 }
-
 
 /* =========================
    JUMLAH KERANJANG

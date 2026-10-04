@@ -163,6 +163,14 @@
                 Laporan
             </button>
 
+            <form method="POST" action="<?php echo e(route('logout')); ?>" style="width:100%; margin-top:8px;">
+    <?php echo csrf_field(); ?>
+
+    <button type="submit" class="menu-item">
+        Keluar
+    </button>
+</form>
+
         </nav>
 
     </aside>

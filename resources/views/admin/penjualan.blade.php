@@ -7,8 +7,7 @@
         margin-bottom:28px;
     }
 
-    .sales-card,
-    .sales-panel{
+    .sales-card{
         background:#fff;
         border:1px solid #f3e8dd;
         border-radius:18px;
@@ -26,178 +25,240 @@
         margin-top:8px;
     }
 
-    .sales-panel{
-        margin-bottom:18px;
+    /* BOARD */
+    .sales-board-wrap{
+        overflow-x:auto;
+        padding-bottom:8px;
     }
 
-    /* FILTER */
-    .sales-filter{
+    .sales-board{
+        display:grid;
+        grid-template-columns:repeat(6, minmax(270px, 1fr));
+        gap:16px;
+        min-width:1660px;
+    }
+
+    .status-column{
+        background:#faf7f4;
+        border:1px solid #eee5de;
+        border-radius:18px;
+        padding:14px;
+        min-height:350px;
+    }
+
+    .column-head{
         display:flex;
-        justify-content:space-between;
         align-items:center;
-        gap:15px;
-        margin-top:18px;
-        margin-bottom:8px;
-        padding:14px 16px;
-        background:#fffaf5;
-        border:1px solid #f3e8dd;
-        border-radius:14px;
+        justify-content:space-between;
+        gap:8px;
+        padding:4px 4px 13px;
+        border-bottom:1px solid #eee5de;
+        margin-bottom:12px;
     }
 
-    .filter-label{
-        font-size:13px;
-        font-weight:700;
+    .column-title{
+        font-size:12px;
+        font-weight:800;
         color:#57534e;
+        text-transform:uppercase;
+        line-height:1.35;
     }
 
-    .filter-wrap{
-        position:relative;
-        min-width:220px;
-    }
-
-    .filter-select{
-        width:100%;
-        appearance:none;
-        -webkit-appearance:none;
-        border:1px solid #e7cfc0;
+    .column-count{
+        min-width:27px;
+        height:27px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:999px;
         background:#fff;
-        color:#57534e;
-        padding:10px 38px 10px 13px;
-        border-radius:11px;
-        outline:none;
-        font-size:13px;
-        font-weight:600;
-        cursor:pointer;
+        color:#78716c;
+        border:1px solid #eadfd6;
+        font-size:11px;
+        font-weight:800;
     }
 
-    .filter-select:focus{
-        border-color:#f97316;
-        box-shadow:0 0 0 3px rgba(249,115,22,.10);
+    .status-column.menunggu{
+        border-top:4px solid #f97316;
     }
 
-    .filter-wrap::after{
-        content:"⌄";
-        position:absolute;
-        right:13px;
-        top:50%;
-        transform:translateY(-55%);
-        color:#f97316;
-        pointer-events:none;
-        font-size:17px;
-        font-weight:700;
+    .status-column.diterima{
+        border-top:4px solid #60a5fa;
     }
 
-    /* ORDER */
-    .order{
-        border:1px solid #f3e8dd;
-        border-radius:15px;
-        padding:18px;
-        margin-top:13px;
+    .status-column.digoreng{
+        border-top:4px solid #fb923c;
+    }
+
+    .status-column.diantar{
+        border-top:4px solid #8b5cf6;
+    }
+
+    .status-column.selesai{
+        border-top:4px solid #22c55e;
+    }
+
+    .status-column.ditolak{
+        border-top:4px solid #ef4444;
+    }
+
+    /* ORDER CARD */
+    .order-card{
+        background:#fff;
+        border:1px solid #eee5de;
+        border-radius:14px;
+        padding:15px;
+        margin-bottom:11px;
+        box-shadow:0 4px 14px rgba(80,50,30,.04);
         transition:.2s ease;
     }
 
-    .order:hover{
-        border-color:#ead3c2;
-        box-shadow:0 5px 18px rgba(92,58,34,.05);
+    .order-card:hover{
+        transform:translateY(-1px);
+        box-shadow:0 8px 20px rgba(80,50,30,.07);
     }
 
-    .order-top{
+    .order-name{
+        font-size:14px;
+        font-weight:800;
+        color:#292524;
+    }
+
+    .order-code{
+        margin-top:4px;
+        color:#a8a29e;
+        font-size:10px;
+    }
+
+    .order-time{
+        color:#a8a29e;
+        font-size:10px;
+        margin-top:2px;
+    }
+
+    .order-items{
+        margin:13px 0;
+        padding-top:10px;
+        border-top:1px solid #f1e9e3;
+        color:#78716c;
+        font-size:11px;
+        line-height:1.7;
+    }
+
+    .order-total{
         display:flex;
         justify-content:space-between;
-        gap:12px;
+        align-items:center;
+        gap:8px;
+        margin-top:12px;
     }
 
-    /* BADGE */
-    .badge{
+    .order-total strong{
+        font-size:13px;
+        color:#292524;
+    }
+
+    .status-pill{
         display:inline-flex;
         align-items:center;
-        justify-content:center;
-        padding:7px 11px;
+        gap:5px;
+        padding:6px 9px;
         border-radius:999px;
-        font-size:10px;
+        font-size:9px;
         font-weight:800;
-        white-space:nowrap;
+        margin-top:11px;
     }
 
-    .badge-menunggu{
+    .pill-menunggu{
         background:#fff7ed;
         color:#ea580c;
     }
 
-    .badge-diterima{
+    .pill-diterima{
         background:#eff6ff;
         color:#2563eb;
     }
 
-    .badge-digoreng{
+    .pill-digoreng{
         background:#fff7ed;
         color:#c2410c;
     }
 
-    .badge-diantar{
+    .pill-diantar{
         background:#f5f3ff;
         color:#7c3aed;
     }
 
-    .badge-selesai{
+    .pill-selesai{
         background:#ecfdf5;
         color:#15803d;
     }
 
-    .badge-ditolak{
+    .pill-ditolak{
         background:#fef2f2;
         color:#dc2626;
     }
 
-    .items{
-        margin:12px 0;
-        color:#78716c;
-        font-size:12px;
-        line-height:1.7;
+    /* ACTION BUTTON */
+    .order-actions{
+        display:flex;
+        flex-direction:column;
+        gap:7px;
+        margin-top:12px;
     }
 
-    /* STATUS SELECT */
-    .status-wrap{
-        position:relative;
-        min-width:220px;
-    }
-
-    .status-select{
+    .status-btn{
         width:100%;
-        appearance:none;
-        -webkit-appearance:none;
-        border:1px solid #ead8cc;
-        background:#fffaf5;
-        color:#57534e;
-        padding:10px 38px 10px 13px;
-        border-radius:11px;
-        outline:none;
-        font-size:12px;
-        font-weight:700;
+        border:0;
+        border-radius:9px;
+        padding:10px 11px;
+        font-size:11px;
+        font-weight:800;
         cursor:pointer;
         transition:.2s ease;
     }
 
-    .status-select:hover{
-        border-color:#f97316;
-        background:#fff7ed;
+    .status-btn.primary{
+        background:#f97316;
+        color:white;
     }
 
-    .status-select:focus{
-        border-color:#f97316;
-        box-shadow:0 0 0 3px rgba(249,115,22,.10);
+    .status-btn.primary:hover{
+        background:#ea580c;
     }
 
-    .status-wrap::after{
-        content:"⌄";
-        position:absolute;
-        right:13px;
-        top:50%;
-        transform:translateY(-55%);
-        color:#f97316;
-        pointer-events:none;
-        font-size:17px;
-        font-weight:700;
+    .status-btn.danger{
+        background:#fff1f2;
+        color:#dc2626;
+    }
+
+    .status-btn.danger:hover{
+        background:#ffe4e6;
+    }
+
+    .status-btn.success{
+        background:#ecfdf5;
+        color:#15803d;
+    }
+
+    .status-btn.success:hover{
+        background:#dcfce7;
+    }
+
+    .status-btn.info{
+        background:#eff6ff;
+        color:#2563eb;
+    }
+
+    .status-btn.info:hover{
+        background:#dbeafe;
+    }
+
+    .empty-column{
+        color:#aaa19a;
+        font-size:11px;
+        text-align:center;
+        padding:35px 10px;
     }
 
     /* MODAL */
@@ -216,68 +277,66 @@
         display:flex;
     }
 
-    .box{
-        width:min(420px,100%);
+    .modal-box{
+        width:min(400px,100%);
         background:#fff;
         border-radius:20px;
         padding:25px;
+        box-shadow:0 20px 50px rgba(0,0,0,.12);
     }
 
-    .primary{
-        border:0;
-        background:#f97316;
-        color:#fff;
-        padding:11px 15px;
-        border-radius:10px;
-        font-weight:700;
-        cursor:pointer;
+    .modal-box h2{
+        font-size:20px;
+        margin:0;
     }
 
-    .actions{
+    .modal-box p{
+        margin-top:8px;
+        color:#a8a29e;
+        font-size:13px;
+        line-height:1.5;
+    }
+
+    .modal-actions{
         display:flex;
         justify-content:flex-end;
         margin-top:18px;
     }
 
-    .empty-filter{
-        display:none;
-        padding:40px;
-        text-align:center;
-        color:#a8a29e;
+    .close-btn{
+        border:0;
+        background:#f97316;
+        color:#fff;
+        padding:10px 15px;
+        border-radius:10px;
+        font-weight:700;
+        cursor:pointer;
     }
 
     @media(max-width:800px){
         .sales-stats{
             grid-template-columns:1fr;
         }
-
-        .sales-filter{
-            flex-direction:column;
-            align-items:stretch;
-        }
-
-        .filter-wrap,
-        .status-wrap{
-            min-width:100%;
-        }
-
-        .order-top{
-            flex-direction:column;
-        }
     }
 </style>
+
 
 <div class="page-heading">
     <h1>Penjualan</h1>
 </div>
 
+
+<!-- SUMMARY -->
 <div class="sales-stats">
 
     <div class="sales-card">
         <span>PENJUALAN</span>
+
         <strong>
             Rp{{ number_format(
-                $pesanans->where('status','!=','ditolak')->sum('total'),
+                $pesanans
+                    ->where('status','!=','ditolak')
+                    ->sum('total'),
                 0,
                 ',',
                 '.'
@@ -285,213 +344,285 @@
         </strong>
     </div>
 
+
     <div class="sales-card">
         <span>TRANSAKSI HARI INI</span>
-        <strong>{{ $pesanans->count() }}</strong>
+
+        <strong>
+            {{ $pesanans->count() }}
+        </strong>
     </div>
+
 
     <div class="sales-card">
         <span>MENUNGGU KONFIRMASI</span>
-        <strong>{{ $pesanans->where('status','menunggu')->count() }}</strong>
+
+        <strong id="waitingCount">
+            {{ $pesanans->where('status','menunggu')->count() }}
+        </strong>
     </div>
 
 </div>
 
-<div class="sales-panel">
 
-    <div style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        gap:15px;
-        flex-wrap:wrap;
-    ">
-        <h3>Pesanan Masuk Hari Ini</h3>
-    </div>
+<!-- BOARD -->
+<div class="sales-board-wrap">
 
-    <!-- FILTER STATUS -->
-    <div class="sales-filter">
+    <div class="sales-board">
 
-        <div class="filter-label">
-            Filter Status Pesanan
-        </div>
 
-        <div class="filter-wrap">
-            <select
-                id="filterStatus"
-                class="filter-select"
-                onchange="filterStatusPesanan()"
-            >
-                <option value="semua">Semua Status</option>
-                <option value="menunggu">Menunggu Konfirmasi</option>
-                <option value="diterima">Pesanan Diterima</option>
-                <option value="digoreng">Sedang Digoreng</option>
-                <option value="diantar">Sedang Diantar</option>
-                <option value="selesai">Selesai</option>
-                <option value="ditolak">Ditolak</option>
-            </select>
-        </div>
+        <!-- MENUNGGU -->
+        <div class="status-column menunggu"
+             id="column-menunggu">
 
-    </div>
+            <div class="column-head">
 
-    <div id="ordersContainer">
-
-        @forelse($pesanans as $pesanan)
-
-            <div
-                class="order"
-                data-status="{{ $pesanan->status }}"
-            >
-
-                <div class="order-top">
-
-                    <div>
-                        <b>{{ $pesanan->nama_pelanggan }}</b>
-
-                        <div style="color:#a8a29e;font-size:11px">
-                            {{ $pesanan->kode }} ·
-                            {{ $pesanan->created_at->format('H:i') }}
-                        </div>
-                    </div>
-
-                    @php
-                        $statusLabels = [
-                            'menunggu' => 'Menunggu Konfirmasi',
-                            'diterima' => 'Pesanan Diterima',
-                            'digoreng' => 'Sedang Digoreng',
-                            'diantar' => 'Sedang Diantar',
-                            'selesai' => 'Selesai',
-                            'ditolak' => 'Ditolak',
-                        ];
-
-                        $statusClass = [
-                            'menunggu' => 'badge-menunggu',
-                            'diterima' => 'badge-diterima',
-                            'digoreng' => 'badge-digoreng',
-                            'diantar' => 'badge-diantar',
-                            'selesai' => 'badge-selesai',
-                            'ditolak' => 'badge-ditolak',
-                        ];
-                    @endphp
-
-                    <span class="badge {{ $statusClass[$pesanan->status] ?? 'badge-menunggu' }}">
-                        {{ $statusLabels[$pesanan->status] ?? ucfirst($pesanan->status) }}
-                    </span>
-
+                <div class="column-title">
+                    Menunggu<br>
+                    Konfirmasi
                 </div>
 
-                <div class="items">
-
-                    @foreach($pesanan->items as $item)
-
-                        {{ $item->nama_produk }}
-                        × {{ $item->jumlah }}
-                        — Rp{{ number_format($item->subtotal,0,',','.') }}
-
-                        <br>
-
-                    @endforeach
-
-                </div>
-
-                <div style="
-                    display:flex;
-                    justify-content:space-between;
-                    align-items:center;
-                    gap:10px;
-                    flex-wrap:wrap;
-                ">
-
-                    <b>
-                        Rp{{ number_format($pesanan->total,0,',','.') }}
-                    </b>
-
-                    <div class="status-wrap">
-
-                        <select
-                            class="status-select"
-                            onchange="ubahStatus({{ $pesanan->id }},this.value)"
-                        >
-
-                            <option value="menunggu"
-                                @selected($pesanan->status==='menunggu')>
-                                Menunggu Konfirmasi
-                            </option>
-
-                            <option value="diterima"
-                                @selected($pesanan->status==='diterima')>
-                                Pesanan Diterima
-                            </option>
-
-                            <option value="digoreng"
-                                @selected($pesanan->status==='digoreng')>
-                                Sedang Digoreng
-                            </option>
-
-                            <option value="diantar"
-                                @selected($pesanan->status==='diantar')>
-                                Sedang Diantar
-                            </option>
-
-                            <option value="selesai"
-                                @selected($pesanan->status==='selesai')>
-                                Selesai
-                            </option>
-
-                            <option value="ditolak"
-                                @selected($pesanan->status==='ditolak')>
-                                Ditolak
-                            </option>
-
-                        </select>
-
-                    </div>
-
+                <div class="column-count">
+                    {{ $pesanans->where('status','menunggu')->count() }}
                 </div>
 
             </div>
 
-        @empty
 
-            <div style="
-                padding:45px;
-                text-align:center;
-                color:#a8a29e;
-            ">
-                Belum ada pesanan hari ini.
+            @forelse(
+                $pesanans->where('status','menunggu')
+                as $pesanan
+            )
+
+                @include('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'menunggu'
+                ])
+
+            @empty
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            @endforelse
+
+        </div>
+
+
+        <!-- DITERIMA -->
+        <div class="status-column diterima"
+             id="column-diterima">
+
+            <div class="column-head">
+
+                <div class="column-title">
+                    Pesanan<br>
+                    Diterima
+                </div>
+
+                <div class="column-count">
+                    {{ $pesanans->where('status','diterima')->count() }}
+                </div>
+
             </div>
 
-        @endforelse
 
-        <div
-            id="emptyFilter"
-            class="empty-filter"
-        >
-            Tidak ada pesanan dengan status tersebut.
+            @forelse(
+                $pesanans->where('status','diterima')
+                as $pesanan
+            )
+
+                @include('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'diterima'
+                ])
+
+            @empty
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            @endforelse
+
         </div>
+
+
+        <!-- DIGORENG -->
+        <div class="status-column digoreng"
+             id="column-digoreng">
+
+            <div class="column-head">
+
+                <div class="column-title">
+                    Sedang<br>
+                    Digoreng
+                </div>
+
+                <div class="column-count">
+                    {{ $pesanans->where('status','digoreng')->count() }}
+                </div>
+
+            </div>
+
+
+            @forelse(
+                $pesanans->where('status','digoreng')
+                as $pesanan
+            )
+
+                @include('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'digoreng'
+                ])
+
+            @empty
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            @endforelse
+
+        </div>
+
+
+        <!-- DIANTAR -->
+        <div class="status-column diantar"
+             id="column-diantar">
+
+            <div class="column-head">
+
+                <div class="column-title">
+                    Sedang<br>
+                    Diantar
+                </div>
+
+                <div class="column-count">
+                    {{ $pesanans->where('status','diantar')->count() }}
+                </div>
+
+            </div>
+
+
+            @forelse(
+                $pesanans->where('status','diantar')
+                as $pesanan
+            )
+
+                @include('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'diantar'
+                ])
+
+            @empty
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            @endforelse
+
+        </div>
+
+
+        <!-- SELESAI -->
+        <div class="status-column selesai"
+             id="column-selesai">
+
+            <div class="column-head">
+
+                <div class="column-title">
+                    Selesai
+                </div>
+
+                <div class="column-count">
+                    {{ $pesanans->where('status','selesai')->count() }}
+                </div>
+
+            </div>
+
+
+            @forelse(
+                $pesanans->where('status','selesai')
+                as $pesanan
+            )
+
+                @include('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'selesai'
+                ])
+
+            @empty
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            @endforelse
+
+        </div>
+
+
+        <!-- DITOLAK -->
+        <div class="status-column ditolak"
+             id="column-ditolak">
+
+            <div class="column-head">
+
+                <div class="column-title">
+                    Ditolak
+                </div>
+
+                <div class="column-count">
+                    {{ $pesanans->where('status','ditolak')->count() }}
+                </div>
+
+            </div>
+
+
+            @forelse(
+                $pesanans->where('status','ditolak')
+                as $pesanan
+            )
+
+                @include('admin.partials.order-card', [
+                    'pesanan' => $pesanan,
+                    'status' => 'ditolak'
+                ])
+
+            @empty
+
+                <div class="empty-column">
+                    Belum ada pesanan.
+                </div>
+
+            @endforelse
+
+        </div>
+
 
     </div>
 
 </div>
+
 
 <!-- MODAL -->
 <div class="modal" id="statusModal">
 
-    <div class="box">
+    <div class="modal-box">
 
         <h2 id="statusTitle">
-            Status diperbarui
+            Berhasil
         </h2>
 
-        <p
-            id="statusText"
-            style="color:#a8a29e;font-size:13px"
-        ></p>
+        <p id="statusText"></p>
 
-        <div class="actions">
+        <div class="modal-actions">
 
             <button
-                class="primary"
+                class="close-btn"
                 onclick="statusModal.classList.remove('show')"
             >
                 Tutup
@@ -503,99 +634,545 @@
 
 </div>
 
+<!-- MODAL ALASAN PENOLAKAN -->
+<div class="modal" id="tolakModal">
+
+    <div class="modal-box">
+
+        <h2>Alasan Pesanan Ditolak</h2>
+
+        <p>
+            Pilih alasan agar pelanggan mengetahui
+            kenapa pesanannya tidak dapat diproses.
+        </p>
+
+        <select
+            id="alasanTolak"
+            style="
+                width:100%;
+                margin-top:18px;
+                padding:12px;
+                border:1px solid #ead8cc;
+                border-radius:11px;
+                background:#fffaf5;
+                color:#57534e;
+                font-size:13px;
+                outline:none;
+            "
+        >
+            <option value="">
+                Pilih alasan penolakan
+            </option>
+
+            <option value="Stok produk habis.">
+                Stok produk habis
+            </option>
+
+            <option value="Produk tidak tersedia.">
+                Produk tidak tersedia
+            </option>
+
+            <option value="Pesanan tidak dapat diproses.">
+                Pesanan tidak dapat diproses
+            </option>
+        </select>
+
+        <textarea
+            id="catatanTolak"
+            rows="3"
+            placeholder="Tambahkan keterangan untuk pelanggan (opsional)"
+            style="
+                width:100%;
+                margin-top:12px;
+                padding:12px;
+                border:1px solid #ead8cc;
+                border-radius:11px;
+                resize:none;
+                font-family:inherit;
+                font-size:13px;
+                outline:none;
+            "
+        ></textarea>
+
+        <div
+            id="tolakError"
+            style="
+                display:none;
+                margin-top:10px;
+                padding:10px;
+                border-radius:10px;
+                background:#fef2f2;
+                color:#dc2626;
+                font-size:12px;
+            "
+        ></div>
+
+        <div style="
+            display:flex;
+            justify-content:flex-end;
+            gap:10px;
+            margin-top:18px;
+        ">
+
+            <button
+                type="button"
+                class="status-btn"
+                style="
+                    width:auto;
+                    background:#f5f5f4;
+                    color:#57534e;
+                    padding:10px 15px;
+                "
+                onclick="tutupModalTolak()"
+            >
+                Kembali
+            </button>
+
+            <button
+                type="button"
+                class="status-btn danger"
+                style="
+                    width:auto;
+                    padding:10px 15px;
+                "
+                onclick="konfirmasiTolak()"
+            >
+                Tolak Pesanan
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 <script>
 
-const stToken='{{ csrf_token() }}';
+const stToken = '{{ csrf_token() }}';
+
+
+const statusInfo = {
+
+    menunggu: {
+        label: 'Menunggu Konfirmasi',
+        pill: 'pill-menunggu'
+    },
+
+    diterima: {
+        label: 'Pesanan Diterima',
+        pill: 'pill-diterima'
+    },
+
+    digoreng: {
+        label: 'Sedang Digoreng',
+        pill: 'pill-digoreng'
+    },
+
+    diantar: {
+        label: 'Sedang Diantar',
+        pill: 'pill-diantar'
+    },
+
+    selesai: {
+        label: 'Selesai',
+        pill: 'pill-selesai'
+    },
+
+    ditolak: {
+        label: 'Ditolak',
+        pill: 'pill-ditolak'
+    }
+
+};
 
 
 /* =========================
-   FILTER STATUS
+   ACTION BUTTONS
 ========================= */
 
-function filterStatusPesanan(){
+function actionButtons(id, status){
 
-    const filter =
-        document.getElementById('filterStatus').value;
+    if(status === 'menunggu'){
 
-    const orders =
-        document.querySelectorAll(
-            '#ordersContainer .order'
+        return `
+            <button
+                type="button"
+                class="status-btn primary"
+                onclick="ubahStatus(${id}, 'diterima', this.closest('.order-card'))"
+            >
+                ✓ Setujui Pesanan
+            </button>
+
+            <button
+    type="button"
+    class="status-btn danger"
+    onclick="bukaModalTolak(${id}, this.closest('.order-card'))"
+>
+    Tolak Pesanan
+</button>
+        `;
+
+    }
+
+
+    if(status === 'diterima'){
+
+        return `
+            <button
+                type="button"
+                class="status-btn primary"
+                onclick="ubahStatus(${id}, 'digoreng', this.closest('.order-card'))"
+            >
+                Mulai Digoreng
+            </button>
+        `;
+
+    }
+
+
+    if(status === 'digoreng'){
+
+        return `
+            <button
+                type="button"
+                class="status-btn info"
+                onclick="ubahStatus(${id}, 'diantar', this.closest('.order-card'))"
+            >
+                Pesanan Diantar
+            </button>
+        `;
+
+    }
+
+
+    if(status === 'diantar'){
+
+        return `
+            <button
+                type="button"
+                class="status-btn success"
+                onclick="ubahStatus(${id}, 'selesai', this.closest('.order-card'))"
+            >
+                Tandai Selesai
+            </button>
+        `;
+
+    }
+
+
+    return '';
+}
+
+
+/* =========================
+   MOVE CARD
+========================= */
+
+function moveCard(card, id, newStatus){
+
+    const target =
+        document.getElementById(
+            'column-' + newStatus
         );
 
-    let visible = 0;
+    if(!target) return;
 
-    orders.forEach(order => {
 
-        const status =
-            order.dataset.status;
+    /* badge */
+    const info = statusInfo[newStatus];
 
-        const show =
-            filter === 'semua' ||
-            status === filter;
+    const badge =
+        card.querySelector('.status-pill');
 
-        order.style.display =
-            show ? '' : 'none';
+    badge.textContent =
+        info.label;
 
-        if(show){
-            visible++;
-        }
+    badge.className =
+        'status-pill ' + info.pill;
 
-    });
 
-    const emptyFilter =
-        document.getElementById('emptyFilter');
+    /* status data */
+    card.dataset.status =
+        newStatus;
 
-    emptyFilter.style.display =
-        visible === 0 ? 'block' : 'none';
+
+    /* buttons */
+    const actions =
+        card.querySelector('.order-actions');
+
+    actions.innerHTML =
+        actionButtons(id, newStatus);
+
+
+    /* pindahkan card */
+    target.appendChild(card);
+
+
+    updateColumnCounts();
 
 }
 
 
 /* =========================
-   UBAH STATUS
+   UPDATE JUMLAH COLUMN
 ========================= */
 
-async function ubahStatus(id,status){
+function updateColumnCounts(){
+
+    document.querySelectorAll(
+        '.status-column'
+    ).forEach(column => {
+
+        const count =
+            column.querySelectorAll(
+                '.order-card'
+            ).length;
+
+        const counter =
+            column.querySelector(
+                '.column-count'
+            );
+
+        if(counter){
+            counter.textContent =
+                count;
+        }
+
+        const empty =
+            column.querySelector(
+                '.empty-column'
+            );
+
+        if(empty){
+
+            empty.style.display =
+                count === 0
+                    ? 'block'
+                    : 'none';
+
+        }
+
+    });
+
+
+    const waiting =
+        document.querySelectorAll(
+            '#column-menunggu .order-card'
+        ).length;
+
+    const waitingCount =
+        document.getElementById(
+            'waitingCount'
+        );
+
+    if(waitingCount){
+        waitingCount.textContent =
+            waiting;
+    }
+
+}
+
+
+/* =========================
+   UPDATE STATUS
+========================= */
+
+async function ubahStatus(id, status, card){
 
     try{
 
-        let r=await fetch(
-            '/admin/penjualan/'+id+'/status',
-            {
-                method:'PUT',
-                headers:{
-                    'Content-Type':'application/json',
-                    'Accept':'application/json',
-                    'X-CSRF-TOKEN':stToken
-                },
-                body:JSON.stringify({status})
-            }
+        const response =
+            await fetch(
+                '/admin/penjualan/' +
+                id +
+                '/status',
+                {
+                    method:'PUT',
+
+                    headers:{
+                        'Content-Type':
+                            'application/json',
+
+                        'Accept':
+                            'application/json',
+
+                        'X-CSRF-TOKEN':
+                            stToken
+                    },
+
+                    body:
+                        JSON.stringify({
+                            status:status
+                        })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                'Status gagal diperbarui.'
+            );
+
+        }
+
+
+        moveCard(
+            card,
+            id,
+            status
         );
 
-        let d=await r.json();
 
-        if(!r.ok)
-            throw new Error(
-                d.message || 'Status gagal diperbarui.'
-            );
+        statusTitle.textContent =
+            'Berhasil';
 
-        const order =
-            document.querySelector(
-                `.order:has(.status-select option:checked[value="${status}"])`
-            );
+        statusText.textContent =
+            data.message ||
+            'Status pesanan berhasil diperbarui.';
 
-        statusTitle.textContent='Berhasil';
-        statusText.textContent=d.message;
-        statusModal.classList.add('show');
+        statusModal.classList.add(
+            'show'
+        );
 
-    }catch(e){
 
-        statusTitle.textContent='Tidak berhasil';
-        statusText.textContent=e.message;
-        statusModal.classList.add('show');
+    }catch(error){
+
+        statusTitle.textContent =
+            'Tidak berhasil';
+
+        statusText.textContent =
+            error.message;
+
+        statusModal.classList.add(
+            'show'
+        );
 
     }
 
+}
+
+let pesananTolakId = null;
+let cardTolak = null;
+
+function bukaModalTolak(id, card) {
+
+    pesananTolakId = id;
+    cardTolak = card;
+
+    document.getElementById('alasanTolak').value = '';
+    document.getElementById('catatanTolak').value = '';
+    document.getElementById('tolakError').style.display = 'none';
+
+    document.getElementById('tolakModal').classList.add('show');
+}
+
+
+function tutupModalTolak() {
+
+    document
+        .getElementById('tolakModal')
+        .classList.remove('show');
+}
+
+
+async function konfirmasiTolak() {
+
+    const alasan =
+        document.getElementById('alasanTolak').value;
+
+    const catatan =
+        document.getElementById('catatanTolak')
+            .value
+            .trim();
+
+    const errorBox =
+        document.getElementById('tolakError');
+
+
+    if (!alasan) {
+
+        errorBox.textContent =
+            'Silakan pilih alasan penolakan terlebih dahulu.';
+
+        errorBox.style.display = 'block';
+
+        return;
+    }
+
+
+    let alasanFinal = alasan;
+
+    if (catatan) {
+        alasanFinal += ' ' + catatan;
+    }
+
+
+    try {
+
+        const response = await fetch(
+            '/admin/penjualan/' + pesananTolakId + '/status',
+            {
+                method: 'PUT',
+
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': stToken
+                },
+
+                body: JSON.stringify({
+                    status: 'ditolak',
+                    alasan_penolakan: alasanFinal
+                })
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (!response.ok) {
+            throw new Error(
+                data.message || 'Pesanan gagal ditolak.'
+            );
+        }
+
+
+        tutupModalTolak();
+
+
+        // pindahkan kartu ke wadah Ditolak
+        moveCard(
+            cardTolak,
+            pesananTolakId,
+            'ditolak'
+        );
+
+
+        // tampilkan notifikasi
+        statusTitle.textContent =
+            'Pesanan Ditolak';
+
+        statusText.textContent =
+            'Alasan penolakan berhasil disimpan.';
+
+        statusModal.classList.add('show');
+
+
+    } catch (error) {
+
+        errorBox.textContent =
+            error.message;
+
+        errorBox.style.display =
+            'block';
+    }
 }
 
 </script>

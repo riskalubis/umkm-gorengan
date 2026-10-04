@@ -398,7 +398,7 @@
             <?php if($produk->foto): ?>
 
                 <img
-                    src="<?php echo e(asset('storage/'.$produk->foto)); ?>"
+                   src="<?php echo e(\Illuminate\Support\Facades\Storage::disk('public')->url($produk->foto)); ?>"
                     alt="<?php echo e($produk->nama); ?>"
                 >
 
