@@ -167,7 +167,7 @@
     @csrf
 
     <button type="submit" class="menu-item">
-        ↪ Keluar
+        Keluar
     </button>
 </form>
 

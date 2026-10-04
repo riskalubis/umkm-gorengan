@@ -3,11 +3,7 @@
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
-
-    /* Jarak dari deskripsi Laporan Penjualan */
     margin-top:32px;
-
-    /* Jarak card ke panel Aktivitas Penjualan */
     margin-bottom:30px;
 }
 
@@ -59,10 +55,26 @@
     border-bottom:1px solid #f3e8dd;
     text-align:left;
     font-size:12px;
+    vertical-align:top;
 }
 
 .table th{
     color:#a8a29e;
+}
+
+.product-list{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.product-item{
+    color:#57534e;
+}
+
+.product-qty{
+    color:#f97316;
+    font-weight:700;
 }
 
 @media(max-width:800px){
@@ -79,7 +91,6 @@
 
 <div class="page-heading">
     <h1>Laporan Penjualan</h1>
-
 </div>
 
 <div class="report-cards">
@@ -160,7 +171,7 @@
                 <th>Pelanggan</th>
                 <th>Waktu</th>
                 <th>Total</th>
-                <th>Status</th>
+                <th>Produk Dibeli</th>
             </tr>
         </thead>
 
@@ -187,7 +198,22 @@
                     </td>
 
                     <td>
-                        {{ strtoupper($p->status) }}
+
+                        <div class="product-list">
+
+                            @foreach($p->items as $item)
+
+                                <div class="product-item">
+                                    {{ $item->nama_produk }}
+                                    <span class="product-qty">
+                                        × {{ $item->jumlah }}
+                                    </span>
+                                </div>
+
+                            @endforeach
+
+                        </div>
+
                     </td>
 
                 </tr>

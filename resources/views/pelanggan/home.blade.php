@@ -233,8 +233,8 @@ body{
     background:white;
     border:1px solid #f0e5dc;
     border-radius:20px;
-    padding:25px;
-    max-width:650px;
+    padding:20px;
+    max-width:480px;
 }
 
 .field{
@@ -645,7 +645,7 @@ body{
         class="add-btn"
         onclick="addToCart({{ $inv->produk->id }})"
     >
-        + Tambah ke Keranjang
+        Tambah ke Keranjang
     </button>
 
 </div>
@@ -727,7 +727,7 @@ body{
 
     <div class="footer-info">
         <b>Hubungi Kami</b><br>
-        WhatsApp: 0831-23480908<br>
+        WhatsApp: 0831-2348-0908<br>
         Instagram: @gorenganku
     </div>
 
@@ -1376,7 +1376,7 @@ async function cekPesanan(){
                 'Pesanan Selesai',
 
             dibatalkan:
-                'Pesanan Dibatalkan'
+                'Pesanan Ditolak'
 
         };
 
