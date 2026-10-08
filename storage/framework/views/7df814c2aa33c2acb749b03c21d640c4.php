@@ -591,7 +591,7 @@ body{
         <?php if($inv->produk->foto): ?>
 
             <img
-                src="<?php echo e(asset('storage/'.$inv->produk->foto)); ?>"
+                src="<?php echo e(\Illuminate\Support\Facades\Storage::disk('public')->url($inv->produk->foto)); ?>"
                 alt="<?php echo e($inv->produk->nama); ?>"
             >
 

@@ -993,74 +993,77 @@
     }
 
 
-    async function hapusKategori(id, nama) {
+   let kategoriHapusId = null;
+let kategoriHapusNama = '';
 
-        const yakin =
-            confirm(
-                'Hapus kategori "' +
-                nama +
-                '"?'
+
+function hapusKategori(id, nama) {
+
+    kategoriHapusId = id;
+    kategoriHapusNama = nama;
+
+    document.getElementById('hapusKategoriText').innerText =
+        'Yakin ingin menghapus kategori "' + nama + '"?';
+
+    document
+        .getElementById('hapusKategoriModal')
+        .classList.add('show');
+}
+
+
+function tutupModalHapusKategori() {
+
+    document
+        .getElementById('hapusKategoriModal')
+        .classList.remove('show');
+
+}
+
+
+async function konfirmasiHapusKategori() {
+
+    if (!kategoriHapusId) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `/kategori/${kategoriHapusId}`,
+            {
+                method: 'DELETE',
+
+                headers: {
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                'Kategori gagal dihapus.'
             );
 
-
-        if (!yakin) {
-            return;
         }
 
 
-        try {
+        window.location.reload();
 
-            const response =
-                await fetch(
-                    `/kategori/${id}`,
-                    {
+    } catch (error) {
 
-                        method: 'DELETE',
-
-                        headers: {
-
-                            'Accept':
-                                'application/json',
-
-                            'X-CSRF-TOKEN':
-                                '{{ csrf_token() }}'
-
-                        }
-
-                    }
-                );
-
-
-            const data =
-                await response.json();
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data.message ||
-                    'Kategori gagal dihapus.'
-                );
-
-            }
-
-
-            window.location.reload();
-
-        }
-
-
-        catch (error) {
-
-            console.error(error);
-
-            document.getElementById('confirmTitle').innerText = 'Tidak dapat menghapus';
-            document.getElementById('confirmText').innerText = error.message;
-            document.getElementById('confirmModal').classList.add('show');
-
-        }
+        document.getElementById(
+            'hapusKategoriText'
+        ).innerText = error.message;
 
     }
+}
 
 
     document.addEventListener(
@@ -1075,5 +1078,54 @@
 
         }
     );
+
+<!-- MODAL HAPUS KATEGORI -->
+
+<div
+    id="hapusKategoriModal"
+    class="modal-overlay"
+>
+    <div
+        class="kategori-modal"
+        style="max-width:420px;"
+        onclick="event.stopPropagation()"
+    >
+
+        <h2 class="modal-title">
+            Hapus Kategori
+        </h2>
+
+        <p
+            class="modal-subtitle"
+            id="hapusKategoriText"
+        >
+            Yakin ingin menghapus kategori ini?
+        </p>
+
+        <div
+            class="modal-actions"
+            style="margin-top:22px;"
+        >
+
+            <button
+                type="button"
+                class="btn-batal"
+                onclick="tutupModalHapusKategori()"
+            >
+                Batal
+            </button>
+
+            <button
+                type="button"
+                class="btn-hapus"
+                onclick="konfirmasiHapusKategori()"
+            >
+                Hapus
+            </button>
+
+        </div>
+
+    </div>
+</div>
 
 </script>

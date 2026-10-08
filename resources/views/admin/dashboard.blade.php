@@ -139,37 +139,51 @@
 
         <nav class="menu">
 
-            <button type="button" class="menu-item active" data-page="home">
+            <button type="button"
+                    class="menu-item"
+                    data-page="home">
                 Dashboard
             </button>
 
-            <button type="button" class="menu-item" data-page="kategori">
+            <button type="button"
+                    class="menu-item"
+                    data-page="kategori">
                 Kategori
             </button>
 
-            <button type="button" class="menu-item" data-page="produk">
+            <button type="button"
+                    class="menu-item"
+                    data-page="produk">
                 Produk
             </button>
 
-            <button type="button" class="menu-item" data-page="persediaan">
+            <button type="button"
+                    class="menu-item"
+                    data-page="persediaan">
                 Persediaan
             </button>
 
-            <button type="button" class="menu-item" data-page="penjualan">
-                Penjualan 
+            <button type="button"
+                    class="menu-item"
+                    data-page="penjualan">
+                Penjualan
             </button>
 
-            <button type="button" class="menu-item" data-page="laporan">
+            <button type="button"
+                    class="menu-item"
+                    data-page="laporan">
                 Laporan
             </button>
 
-            <form method="POST" action="{{ route('logout') }}" style="width:100%; margin-top:8px;">
-    @csrf
+            <form method="POST"
+                  action="{{ route('logout') }}"
+                  style="width:100%; margin-top:8px;">
+                @csrf
 
-    <button type="submit" class="menu-item">
-        Keluar
-    </button>
-</form>
+                <button type="submit" class="menu-item">
+                    Keluar
+                </button>
+            </form>
 
         </nav>
 
@@ -179,7 +193,6 @@
 
         <header class="topbar">
             <h2>Dashboard Admin</h2>
-
         </header>
 
         <section id="pageContent">
@@ -239,6 +252,17 @@ function executePageScripts(container) {
 */
 async function loadPage(page) {
 
+    /*
+    |--------------------------------------------------------------------------
+    | SIMPAN HALAMAN YANG SEDANG DIBUKA
+    |--------------------------------------------------------------------------
+    | Jadi kalau halaman melakukan reload(),
+    | nanti halaman yang sama akan dibuka kembali.
+    |--------------------------------------------------------------------------
+    */
+    localStorage.setItem('adminPage', page);
+
+
     pageContent.innerHTML = `
         <div class="loading">
             Memuat halaman...
@@ -275,10 +299,7 @@ async function loadPage(page) {
 
         /*
         |--------------------------------------------------------------------------
-        | PENTING
-        | Jalankan JavaScript yang ada di halaman tersebut.
-        | Ini yang membuat tombol "+ Tambah Produk"
-        | bisa menjalankan openProduk().
+        | Jalankan JavaScript dari halaman tersebut
         |--------------------------------------------------------------------------
         */
         executePageScripts(pageContent);
@@ -364,10 +385,20 @@ document.addEventListener('click', function(e) {
 
 /*
 |--------------------------------------------------------------------------
-| Load Dashboard pertama kali
+| Load halaman terakhir yang sedang dibuka
+|--------------------------------------------------------------------------
+|
+| Sebelumnya:
+| loadPage('home');
+|
+| Sekarang:
+| ambil halaman terakhir dari localStorage.
+|
 |--------------------------------------------------------------------------
 */
-loadPage('home');
+const savedPage = localStorage.getItem('adminPage') || 'home';
+
+loadPage(savedPage);
 
 </script>
 
