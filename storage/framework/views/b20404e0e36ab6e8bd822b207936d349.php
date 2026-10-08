@@ -235,7 +235,7 @@
         align-items: center;
         justify-content: center;
         padding: 20px;
-        z-index: 9999;
+        z-index: 99999;
     }
 
     .modal-overlay.show {
@@ -392,7 +392,6 @@
     }
 
     @media (max-width: 800px) {
-
         .kategori-summary {
             grid-template-columns: 1fr;
         }
@@ -400,11 +399,9 @@
         .kategori-grid {
             grid-template-columns: 1fr;
         }
-
     }
 
     @media (max-width: 600px) {
-
         .kategori-header {
             flex-direction: column;
             align-items: flex-start;
@@ -419,7 +416,6 @@
             flex-direction: column;
             align-items: flex-start;
         }
-
     }
 </style>
 
@@ -431,21 +427,17 @@
     <div class="kategori-header">
 
         <div>
-
             <h1 class="kategori-title">
                 Kategori
             </h1>
-
-
         </div>
-
 
         <button
             type="button"
             class="btn-tambah"
             onclick="bukaModalKategori()"
         >
-            Tambah Kategori
+            + Tambah Kategori
         </button>
 
     </div>
@@ -466,7 +458,6 @@
 
             </div>
 
-
         </div>
 
 
@@ -480,7 +471,6 @@
                 <?php echo e($produks->count()); ?>
 
             </div>
-
 
         </div>
 
@@ -774,6 +764,8 @@
 </div>
 
 
+
+
 <script>
 
     function bukaModalKategori() {
@@ -789,6 +781,7 @@
 
         document.getElementById('modalError').style.display = 'none';
 
+
         document
             .querySelectorAll('#formKategori input[type="checkbox"]')
             .forEach(function (checkbox) {
@@ -797,17 +790,23 @@
 
             });
 
+
         hitungProduk();
+
 
         document
             .getElementById('modalKategori')
             .classList.add('show');
 
+
         setTimeout(function () {
 
-            document
-                .getElementById('namaKategori')
-                .focus();
+            const input =
+                document.getElementById('namaKategori');
+
+            if (input) {
+                input.focus();
+            }
 
         }, 100);
 
@@ -824,9 +823,13 @@
             return;
         }
 
-        document
-            .getElementById('modalKategori')
-            .classList.remove('show');
+
+        const modal =
+            document.getElementById('modalKategori');
+
+        if (modal) {
+            modal.classList.remove('show');
+        }
 
     }
 
@@ -838,13 +841,24 @@
                 '#formKategori input[name="produk_ids[]"]:checked'
             ).length;
 
-        document.getElementById('produkCount').innerText =
-            jumlah + ' produk dipilih';
+
+        const count =
+            document.getElementById('produkCount');
+
+        if (count) {
+            count.innerText =
+                jumlah + ' produk dipilih';
+        }
 
     }
 
 
-    function editKategori(id, nama, deskripsi, produkIds = []) {
+    function editKategori(
+        id,
+        nama,
+        deskripsi,
+        produkIds = []
+    ) {
 
         document.getElementById('modalTitle').innerText =
             'Edit Kategori';
@@ -861,14 +875,28 @@
         document.getElementById('modalError').style.display =
             'none';
 
-        document.querySelectorAll('#formKategori input[name="produk_ids[]"]').forEach(function (checkbox) {
-            checkbox.checked = produkIds.map(String).includes(String(checkbox.value));
-        });
+
+        document
+            .querySelectorAll(
+                '#formKategori input[name="produk_ids[]"]'
+            )
+            .forEach(function (checkbox) {
+
+                checkbox.checked =
+                    produkIds
+                        .map(String)
+                        .includes(String(checkbox.value));
+
+            });
+
+
         hitungProduk();
+
 
         document
             .getElementById('modalKategori')
             .classList.add('show');
+
 
         document
             .getElementById('namaKategori')
@@ -885,17 +913,20 @@
         const id =
             document.getElementById('kategoriId').value;
 
+
         const nama =
             document
                 .getElementById('namaKategori')
                 .value
                 .trim();
 
+
         const deskripsi =
             document
                 .getElementById('deskripsiKategori')
                 .value
                 .trim();
+
 
         const errorBox =
             document.getElementById('modalError');
@@ -922,7 +953,6 @@
                 'block';
 
             return;
-
         }
 
 
@@ -936,7 +966,9 @@
             const response =
                 await fetch(url, {
 
-                    method: id ? 'PUT' : 'POST',
+                    method: id
+                        ? 'PUT'
+                        : 'POST',
 
                     headers: {
 
@@ -982,7 +1014,6 @@
 
         }
 
-
         catch (error) {
 
             console.error(error);
@@ -998,77 +1029,132 @@
     }
 
 
-   let kategoriHapusId = null;
-let kategoriHapusNama = '';
+    let kategoriHapusId = null;
+
+    let kategoriHapusNama = '';
 
 
-function hapusKategori(id, nama) {
+    function hapusKategori(id, nama) {
 
-    kategoriHapusId = id;
-    kategoriHapusNama = nama;
+        kategoriHapusId = id;
 
-    document.getElementById('hapusKategoriText').innerText =
-        'Yakin ingin menghapus kategori "' + nama + '"?';
-
-    document
-        .getElementById('hapusKategoriModal')
-        .classList.add('show');
-}
+        kategoriHapusNama = nama;
 
 
-function tutupModalHapusKategori() {
-
-    document
-        .getElementById('hapusKategoriModal')
-        .classList.remove('show');
-
-}
-
-
-async function konfirmasiHapusKategori() {
-
-    if (!kategoriHapusId) {
-        return;
-    }
-
-    try {
-
-        const response = await fetch(
-            `/kategori/${kategoriHapusId}`,
-            {
-                method: 'DELETE',
-
-                headers: {
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
-                }
-            }
-        );
-
-
-        const data = await response.json();
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.message ||
-                'Kategori gagal dihapus.'
+        const text =
+            document.getElementById(
+                'hapusKategoriText'
             );
+
+
+        if (text) {
+
+            text.innerText =
+                'Yakin ingin menghapus kategori "' +
+                nama +
+                '"?';
 
         }
 
 
-        window.location.reload();
+        const modal =
+            document.getElementById(
+                'hapusKategoriModal'
+            );
 
-    } catch (error) {
 
-        document.getElementById(
-            'hapusKategoriText'
-        ).innerText = error.message;
+        if (modal) {
+
+            modal.classList.add('show');
+
+        }
 
     }
-}
+
+
+    function tutupModalHapusKategori() {
+
+        const modal =
+            document.getElementById(
+                'hapusKategoriModal'
+            );
+
+
+        if (modal) {
+
+            modal.classList.remove('show');
+
+        }
+
+    }
+
+
+    async function konfirmasiHapusKategori() {
+
+        if (!kategoriHapusId) {
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `/kategori/${kategoriHapusId}`,
+                    {
+
+                        method: 'DELETE',
+
+                        headers: {
+
+                            'Accept':
+                                'application/json',
+
+                            'X-CSRF-TOKEN':
+                                '<?php echo e(csrf_token()); ?>'
+
+                        }
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    'Kategori gagal dihapus.'
+                );
+
+            }
+
+
+            window.location.reload();
+
+        }
+
+        catch (error) {
+
+            const text =
+                document.getElementById(
+                    'hapusKategoriText'
+                );
+
+
+            if (text) {
+
+                text.innerText =
+                    error.message;
+
+            }
+
+        }
+
+    }
 
 
     document.addEventListener(
@@ -1079,17 +1165,28 @@ async function konfirmasiHapusKategori() {
 
                 tutupModalKategori();
 
+                tutupModalHapusKategori();
+
             }
 
         }
     );
 
-<!-- MODAL HAPUS KATEGORI -->
+</script>
+
+
+
 
 <div
     id="hapusKategoriModal"
     class="modal-overlay"
+    onclick="
+        if (event.target === this) {
+            tutupModalHapusKategori();
+        }
+    "
 >
+
     <div
         class="kategori-modal"
         style="max-width:420px;"
@@ -1100,12 +1197,14 @@ async function konfirmasiHapusKategori() {
             Hapus Kategori
         </h2>
 
+
         <p
             class="modal-subtitle"
             id="hapusKategoriText"
         >
             Yakin ingin menghapus kategori ini?
         </p>
+
 
         <div
             class="modal-actions"
@@ -1120,6 +1219,7 @@ async function konfirmasiHapusKategori() {
                 Batal
             </button>
 
+
             <button
                 type="button"
                 class="btn-hapus"
@@ -1131,6 +1231,5 @@ async function konfirmasiHapusKategori() {
         </div>
 
     </div>
-</div>
 
-</script><?php /**PATH C:\Users\apiip\OneDrive\Documents\umkm-gorengan\resources\views/admin/kategori.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\apiip\OneDrive\Documents\umkm-gorengan\resources\views/admin/kategori.blade.php ENDPATH**/ ?>
